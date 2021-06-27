@@ -77,7 +77,12 @@ module TechnicalAnalysis
 
           di_pos = (dm_pos_period / tr_period) * 100.00
           di_neg = (dm_neg_period / tr_period) * 100.00
-          dx = ((dm_pos_period - dm_neg_period).abs / (dm_pos_period + dm_neg_period) * 100.00)
+          dx =
+            if (dm_pos_period + dm_neg_period).zero?
+              (dm_pos_period - dm_neg_period).abs
+            else
+              ((dm_pos_period - dm_neg_period).abs / (dm_pos_period + dm_neg_period) * 100.00)
+            end
 
           dx_values << dx
 
